@@ -26,6 +26,15 @@ DEFAULT_CONFIG = {
 }
 
 
+def resource_path(relative_path):
+    try:
+        from sys import _MEIPASS
+        base_path = _MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
+
 class MainApp(tk.Tk):
     LOOP_MSPT = 500
 
@@ -34,6 +43,8 @@ class MainApp(tk.Tk):
 
         self.title(f'SimpleMulti v{_VERSION}')
         self.resizable(False, False)
+
+        self.iconbitmap(resource_path('SimpleMulti_Icon.ico'))
 
         self._changing = False
         self._active = False
